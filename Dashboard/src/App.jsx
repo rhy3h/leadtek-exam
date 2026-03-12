@@ -13,32 +13,59 @@ function App() {
   useEffect(() => {
     const host = import.meta.env.VITE_WS_HOST || 'localhost';
     const port = import.meta.env.VITE_WS_PORT || '3001';
-    const socket = new WebSocket(`ws://${host}:${port}`);
+    let socket;
+    let reconnectTimer;
+    let isComponentMounted = true;
 
-    socket.onopen = () => {
-      console.log('Connected to server');
-      setStatus('connected');
-    };
+    const connect = () => {
+      if (!isComponentMounted) return;
 
-    socket.onmessage = (event) => {
-      try {
-        const message = JSON.parse(event.data);
-        if (message.type === 'INITIAL_DATA' || message.type === 'TICK') {
-          setStats(message.data);
+      socket = new WebSocket(`ws://${host}:${port}`);
+
+      socket.onopen = () => {
+        console.log('Connected to server');
+        setStatus('connected');
+      };
+
+      socket.onmessage = (event) => {
+        try {
+          const message = JSON.parse(event.data);
+          if (message.type === 'INITIAL_DATA' || message.type === 'TICK') {
+            setStats(message.data);
+          }
+        } catch {
+          // Handle non-JSON messages if any
+          console.log('Server message:', event.data);
         }
-      } catch {
-        // Handle non-JSON messages if any
-        console.log('Server message:', event.data);
-      }
+      };
+
+      socket.onclose = () => {
+        console.log('Disconnected from server');
+        setStatus('disconnected');
+        
+        if (isComponentMounted) {
+          reconnectTimer = setTimeout(() => {
+             console.log('Attempting to reconnect...');
+             connect();
+          }, 3000);
+        }
+      };
+
+      socket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+        // Closing the socket ensures onclose gets fired to start the reconnect timer
+        socket.close();
+      };
     };
 
-    socket.onclose = () => {
-      console.log('Disconnected from server');
-      setStatus('disconnected');
-    };
+    connect();
 
     return () => {
-      socket.close();
+      isComponentMounted = false;
+      clearTimeout(reconnectTimer);
+      if (socket) {
+        socket.close();
+      }
     };
   }, []);
 
