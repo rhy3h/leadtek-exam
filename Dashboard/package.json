@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "node server.js"
+    "server": "node server.js",
+    "test": "wait-on http://localhost:3001/health && node tests/test-client.js",
+    "test:ci": "start-server-and-test server http://localhost:3001/health test"
   },
   "dependencies": {
     "dotenv": "^17.3.1",
@@ -27,6 +29,8 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
-    "vite": "^7.3.1"
+    "start-server-and-test": "^2.1.5",
+    "vite": "^7.3.1",
+    "wait-on": "^9.0.4"
   }
 }
