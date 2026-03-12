@@ -1,16 +1,28 @@
-# React + Vite
+# 系統監控儀表板
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+由於最後有調整 scripts, 此影片單純作為展示功能, 非教學影片  
+[Demo](https://youtu.be/PKBwL_srTWE)
 
-Currently, two official plugins are available:
+## 專案設定
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash=
+npm install
+```
 
-## React Compiler
+## 同時開啟 系統監控 Server & 網站
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash=
+npm run all
+```
 
-## Expanding the ESLint configuration
+## 開啟系統監控 Server
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash=
+npm run server
+```
+
+## 開啟儀表板網站
+
+```bash=
+npm run start
+```
