@@ -11,7 +11,9 @@ function App() {
   const [status, setStatus] = useState('disconnected');
 
   useEffect(() => {
-    const socket = new WebSocket('ws://localhost:3001');
+    const host = import.meta.env.VITE_WS_HOST || 'localhost';
+    const port = import.meta.env.VITE_WS_PORT || '3001';
+    const socket = new WebSocket(`ws://${host}:${port}`);
 
     socket.onopen = () => {
       console.log('Connected to server');

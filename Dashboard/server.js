@@ -5,7 +5,7 @@ import si from 'systeminformation';
 import 'dotenv/config';
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.VITE_WS_PORT || process.env.PORT || 3001;
 
 // Create HTTP server
 const server = http.createServer(app);
