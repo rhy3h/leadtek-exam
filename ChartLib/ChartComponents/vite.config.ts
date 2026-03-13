@@ -19,7 +19,17 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@mui/material', '@mui/x-charts', '@emotion/react', '@emotion/styled'],
+      external: (id) => {
+        const packages = [
+          'react',
+          'react-dom',
+          '@mui/material',
+          '@mui/x-charts',
+          '@emotion/react',
+          '@emotion/styled',
+        ];
+        return packages.some((pkg) => id === pkg || id.startsWith(pkg + '/'));
+      },
     },
   },
 })
