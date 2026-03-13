@@ -24,10 +24,18 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
+    "@emotion/react": ">=11.0.0",
+    "@emotion/styled": ">=11.0.0",
+    "@mui/material": ">=5.0.0",
+    "@mui/x-charts": ">=7.0.0",
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0"
   },
   "devDependencies": {
+    "@emotion/react": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
+    "@mui/material": "^5.0.0",
+    "@mui/x-charts": "^7.0.0",
     "@types/node": "^25.5.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
